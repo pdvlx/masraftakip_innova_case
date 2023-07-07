@@ -1,11 +1,12 @@
 package com.innovacase.services;
-
 import com.innovacase.models.Person;
 import com.innovacase.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class PersonService {
     //Person repomuz icin crud fonksiyonlarinin oldugu servis.
 
@@ -24,8 +25,13 @@ public class PersonService {
         return personRepository.findAll();
     }
 
-    public Person getPersonById(long id) throws Exception {
-        return personRepository.findById(id).orElseThrow(() -> new Exception()); //new ResourceNotFoundException("Person", "id", id));
+    public Person getPersonById(long id) {
+        try {
+            return personRepository.findById(id)
+                    .orElseThrow(ChangeSetPersister.NotFoundException::new);
+        } catch (ChangeSetPersister.NotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public Person updatePerson(long id, Person personDetails){
