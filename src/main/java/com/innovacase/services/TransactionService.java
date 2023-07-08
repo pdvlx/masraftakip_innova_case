@@ -46,4 +46,9 @@ public class TransactionService {
         Transaction transaction = getTransactionById(transactionId);
         transactionRepository.delete(transaction);
     }
+    public double getTotalTransactionByPerson(Long personId){
+        List<Transaction> transactions = transactionRepository.findByPersonId(personId);
+        double totalExpense = transactions.stream().mapToDouble(Transaction::getAmount).sum();
+        return totalExpense;
+    }
 }

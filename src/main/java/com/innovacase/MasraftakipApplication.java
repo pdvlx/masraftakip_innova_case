@@ -14,4 +14,6 @@ public class MasraftakipApplication {
 		SpringApplication.run(MasraftakipApplication.class, args);
 	}
 
+
+
 }

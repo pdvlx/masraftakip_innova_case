@@ -18,8 +18,9 @@ public class PersonController {
         this.personService = personService;
     }
 
-    @PostMapping
+    @PostMapping("/create/")
     public Person createPerson( @RequestBody Person person) {
+
         return personService.savePerson(person);
     }
 

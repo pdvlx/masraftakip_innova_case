@@ -43,4 +43,8 @@ public class TransactionController {
         transactionService.deleteTransaction(transactionId);
         return ResponseEntity.ok().build();
     }
+    public ResponseEntity<Double> getTotalTransactionByPerson(@RequestParam("id") Long personId){
+        double totalTransaction = transactionService.getTotalTransactionByPerson(personId);
+        return ResponseEntity.ok(totalTransaction);
+    }
 }
