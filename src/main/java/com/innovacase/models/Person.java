@@ -1,8 +1,11 @@
 package com.innovacase.models;
 import javax.persistence.*;
+import javax.persistence.Entity;
+
+//@Table(name = "persons")
+
 
 @Entity
-//@Table(name = "persons")
 public class Person {
 
     @Id
