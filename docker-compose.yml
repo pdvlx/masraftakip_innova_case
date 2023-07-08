@@ -1,0 +1,26 @@
+version: '3.7'
+
+services:
+  db:
+    image: postgres:13
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      POSTGRES_DB: masraftakip
+      POSTGRES_USER: akin
+      POSTGRES_PASSWORD: sifre
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/masraftakip
+      SPRING_DATASOURCE_USERNAME: akin
+      SPRING_DATASOURCE_PASSWORD: sifre
+    depends_on:
+      - db
